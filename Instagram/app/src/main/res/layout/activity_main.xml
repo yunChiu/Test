@@ -1,95 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <LinearLayout
-        android:id="@+id/header"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="45dp"
-                android:src="@drawable/brand" />
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end">
-                <Button
-                    android:id="@+id/btn_like"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_marginEnd="25dp"
-                    android:background="@drawable/like_border"
-                    android:layout_gravity="center_vertical" />
+    tools:context=".Activity.MainActivity">
 
-                <Button
-                    android:id="@+id/btn_msg"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/message"
-                    android:layout_gravity="center_vertical"/>
-            </LinearLayout>
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-    </LinearLayout>
-
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
-        android:layout_above="@+id/bottom_nav">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_video"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="10dp" >
-            </androidx.recyclerview.widget.RecyclerView>
-            <View
-                android:id="@+id/divider1"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_below="@+id/rv_video"
-                android:background="?android:attr/listDivider" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_post"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/divider1"
-                android:nestedScrollingEnabled="false">
-            </androidx.recyclerview.widget.RecyclerView>
-        </RelativeLayout>
-
-    </ScrollView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/menu_bottom_nav"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@color/black" />
-</RelativeLayout>
+</LinearLayout>

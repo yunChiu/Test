@@ -4,18 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.webkit.WebSettings;
 
-import com.example.instagram.model.MyNode;
-import com.example.instagram.model.User;
-
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
