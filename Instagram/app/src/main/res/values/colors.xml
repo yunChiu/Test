@@ -5,6 +5,15 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="dodgerblue">#1E90FF</color>
+    <color name="lightgreen">#90EE90</color>
+    <color name="red">#FF3333</color>
+    <color name="gray">#AAAAAA</color>
+    <color name="gainsboro">#DCDCDC</color>
+    <color name="whitesmoke">#F5F5F5</color>
 </resources>

@@ -3,4 +3,25 @@
     <style name="Theme.Instagram" parent="Theme.Design.Light.NoActionBar">
 
     </style>
+
+    <style name="DefaultDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item> <!-- 無標題 -->
+        <item name="android:windowBackground">@android:color/transparent</item> <!-- 背景：預設透明 -->
+        <item name="android:backgroundDimEnabled">true</item> <!-- 背景是否模糊 -->
+        <item name="android:backgroundDimAmount">0.4</item> <!-- 模糊程度 -->
+    </style>
+
+    <style name="DefaultDialog_anim" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item> <!-- 無標題 -->
+        <item name="android:windowBackground">@android:color/transparent</item> <!-- 背景：預設透明 -->
+        <item name="android:windowAnimationStyle">@style/anim</item>
+        <item name="android:backgroundDimEnabled">true</item> <!-- 背景是否模糊 -->
+        <item name="android:backgroundDimAmount">0.4</item> <!-- 模糊程度 -->
+    </style>
+
+    <style name="anim">
+        <item name="android:windowEnterAnimation">@anim/dialog_up</item>
+        <item name="android:windowExitAnimation">@anim/dialog_down</item>
+    </style>
+
 </resources>

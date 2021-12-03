@@ -56,7 +56,7 @@ public class OkHttpManager {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
                         Message msg = new Message();
-                        msg.what = 0;
+                        msg.what = 1;
                         msg.obj = e.getMessage();
                         handler.sendMessage(msg);
                     }
@@ -64,7 +64,7 @@ public class OkHttpManager {
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                         Message msg = new Message();
-                        msg.what = 1;
+                        msg.what = 0;
                         msg.obj = response.body().string();
                         handler.sendMessage(msg);
                     }
@@ -77,7 +77,7 @@ public class OkHttpManager {
     public Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 0){
+            if (msg.what == 1){
                 dataCallback.onDataFail(msg.obj.toString());
             }else {
                 dataCallback.onDataSuccess(msg.obj.toString());

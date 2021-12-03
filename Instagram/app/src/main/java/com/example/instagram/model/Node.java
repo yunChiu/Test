@@ -1,20 +1,42 @@
 package com.example.instagram.model;
 
-import java.util.ArrayList;
 
 public class Node {
-    private String shortcode = ""; //分享貼文用
+    private String shortcode = "";
+    private Dimensions dimensions = new Dimensions();
     private String display_url = ""; //頭貼
     private boolean is_video = false;
-    private Edge_media_to_caption edge_media_to_caption = new Edge_media_to_caption(); //貼文內容
-    private Edge_media_to_comment edge_media_to_comment = new Edge_media_to_comment(); //留言數
+    private Edge_media_to_caption edge_media_to_caption = new Edge_media_to_caption(); //內容
+    private Count edge_media_to_comment = new Count(); //留言數
     private int taken_at_timestamp = 0; //發文時間
-    private Edge_liked_by edge_liked_by = new Edge_liked_by(); //愛心數
-    private Edge_media_preview_like edge_media_preview_like = new Edge_media_preview_like(); //影片觀看人數
+    private Count edge_liked_by = new Count(); //愛心數
+    private Count edge_media_preview_like = new Count(); //影片觀看人數
     private Location location = new Location(); //地點
-    private Edge_sidecar_to_children edge_sidecar_to_children = new Edge_sidecar_to_children();
+    private Edges edge_sidecar_to_children = new Edges();
+    private double video_duration = 0.0;
 
     //class
+    public class Dimensions {
+        public int height = 0;
+        public int width = 0;
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+    }
+
     public class Edge_media_to_caption {
         private Edges_inner edges = new Edges_inner();
         public class Edges_inner {
@@ -46,29 +68,7 @@ public class Node {
         }
     }
 
-    public class Edge_media_to_comment {
-        private int count = 0;
-
-        public void setCount(int count) {
-            this.count = count;
-        }
-        public int getCount() {
-            return count;
-        }
-    }
-
-    public class Edge_liked_by {
-        private int count = 0;
-
-        public void setCount(int count) {
-            this.count = count;
-        }
-        public int getCount() {
-            return count;
-        }
-    }
-
-    public class Edge_media_preview_like {
+    public class Count {
         private int count = 0;
 
         public void setCount(int count) {
@@ -90,23 +90,19 @@ public class Node {
         }
     }
 
-    public class Edge_sidecar_to_children {
-        ArrayList<Node> nodeList = new ArrayList<>();
-
-        public void setNodeList(ArrayList<Node> nodeList) {
-            this.nodeList = nodeList;
-        }
-        public ArrayList<Node> getNodeList() {
-            return nodeList;
-        }
-    }
-
     //getter setter
     public void setShortcode(String shortcode) {
         this.shortcode = shortcode;
     }
     public String getShortcode() {
         return shortcode;
+    }
+
+    public void setDimensions(Dimensions dimensions) {
+        this.dimensions = dimensions;
+    }
+    public Dimensions getDimensions() {
+        return dimensions;
     }
 
     public void setDisplay_url(String display_url) {
@@ -130,10 +126,10 @@ public class Node {
         return edge_media_to_caption;
     }
 
-    public void setEdge_media_to_comment(Edge_media_to_comment edge_media_to_comment) {
+    public void setEdge_media_to_comment(Count edge_media_to_comment) {
         this.edge_media_to_comment = edge_media_to_comment;
     }
-    public Edge_media_to_comment getEdge_media_to_comment() {
+    public Count getEdge_media_to_comment() {
         return edge_media_to_comment;
     }
 
@@ -144,17 +140,17 @@ public class Node {
         return taken_at_timestamp;
     }
 
-    public void setEdge_liked_by(Edge_liked_by edge_liked_by) {
+    public void setEdge_liked_by(Count edge_liked_by) {
         this.edge_liked_by = edge_liked_by;
     }
-    public Edge_liked_by getEdge_liked_by() {
+    public Count getEdge_liked_by() {
         return edge_liked_by;
     }
 
-    public void setEdge_media_preview_like(Edge_media_preview_like edge_media_preview_like) {
+    public void setEdge_media_preview_like(Count edge_media_preview_like) {
         this.edge_media_preview_like = edge_media_preview_like;
     }
-    public Edge_media_preview_like getEdge_media_preview_like() {
+    public Count getEdge_media_preview_like() {
         return edge_media_preview_like;
     }
 
@@ -165,10 +161,17 @@ public class Node {
         return location;
     }
 
-    public void setEdge_sidecar_to_children(Edge_sidecar_to_children edge_sidecar_to_children) {
+    public void setEdge_sidecar_to_children(Edges edge_sidecar_to_children) {
         this.edge_sidecar_to_children = edge_sidecar_to_children;
     }
-    public Edge_sidecar_to_children getEdge_sidecar_to_children() {
+    public Edges getEdge_sidecar_to_children() {
         return edge_sidecar_to_children;
+    }
+
+    public void setVideo_duration(double video_duration) {
+        this.video_duration = video_duration;
+    }
+    public double getVideo_duration() {
+        return video_duration;
     }
 }
