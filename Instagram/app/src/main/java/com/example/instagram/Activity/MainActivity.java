@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.instagram.Dialog.DialogBtn;
-import com.example.instagram.Dialog.DialogList;
+import com.example.instagram.Dialog.DialogList_icon;
 import com.example.instagram.Dialog.OnDialogClickListener;
 import com.example.instagram.R;
 import com.example.instagram.model.DialogListItem;
@@ -104,13 +104,13 @@ public class MainActivity extends AppCompatActivity {
     public void showDialogList_menu(Context context) {
         ArrayList<DialogListItem> userMenu = new ArrayList<>();
 //        node_more.add(new DialogListItem(R.drawable.setting,"設定"));
-        DialogList dialogList = new DialogList(context, userMenu, new OnDialogClickListener() {
+        DialogList_icon dialogListIcon = new DialogList_icon(context, userMenu, new OnDialogClickListener() {
             @Override
             public void onDialogClick(int action) {
 
             }
         });
-        dialogList.show();
+        dialogListIcon.show();
     }
 
 

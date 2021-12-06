@@ -92,6 +92,7 @@
                 android:src="@drawable/home_fill"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_search"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -103,6 +104,7 @@
                 android:src="@drawable/search"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_add"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -114,6 +116,7 @@
                 android:src="@drawable/add"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_shop"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -125,6 +128,7 @@
                 android:src="@drawable/shop_border"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_user"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

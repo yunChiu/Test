@@ -1,6 +1,7 @@
 package com.example.instagram.Activity.Home;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -23,7 +24,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.instagram.Activity.Account.Account;
+import com.example.instagram.Activity.Add.Add;
 import com.example.instagram.Activity.MainActivity;
+import com.example.instagram.Activity.Search.Search;
+import com.example.instagram.Activity.Shop.Shop;
 import com.example.instagram.DataCallback;
 import com.example.instagram.DoubleClick;
 import com.example.instagram.IG_JsonData;
@@ -43,6 +48,7 @@ public class Home extends MainActivity {
     RecyclerView rv_story, rv_post;
     StoryAdapter storyAdapter;
     NodeAdapter nodeAdapter;
+    View nav_home, nav_search, nav_add, nav_shop, nav_user;
 
     ArrayList<User> userList = new ArrayList<>(); //所有追蹤中的帳號
     int tag = 0; //目前顯示的帳號
@@ -73,7 +79,38 @@ public class Home extends MainActivity {
         nodeAdapter = new NodeAdapter();
         rv_post.setAdapter(nodeAdapter);
         rv_post.setLayoutManager(new MyLinearLayoutManager(this,false));
+        //nav
+        nav_search = findViewById(R.id.ll_search);
+        nav_search.setOnClickListener(onClickListener_nav);
+        nav_add = findViewById(R.id.ll_add);
+        nav_add.setOnClickListener(onClickListener_nav);
+        nav_shop = findViewById(R.id.ll_shop);
+        nav_shop.setOnClickListener(onClickListener_nav);
+        nav_user = findViewById(R.id.ll_user);
+        nav_user.setOnClickListener(onClickListener_nav);
     }
+
+    private View.OnClickListener onClickListener_nav = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.ll_search:
+                    startActivity(new Intent(Home.this, Search.class));
+                    break;
+                case R.id.ll_add:
+                    startActivity(new Intent(Home.this, Add.class));
+                    break;
+                case R.id.ll_shop:
+                    startActivity(new Intent(Home.this, Shop.class));
+                    break;
+                case R.id.ll_user:
+                    startActivity(new Intent(Home.this, Account.class));
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     private void getFollowedData(String userName) {
         String url = "https://www.instagram.com/" + userName + "/?__a=1";

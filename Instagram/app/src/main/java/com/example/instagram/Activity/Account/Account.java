@@ -1,4 +1,4 @@
-package com.example.instagram.Activity.User;
+package com.example.instagram.Activity.Account;
 
 import android.os.Bundle;
 
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.instagram.R;
 
-public class User extends AppCompatActivity {
+public class Account extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,7 +15,7 @@ public class User extends AppCompatActivity {
     }
 
     private void initView() {
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_account);
 
 
     }

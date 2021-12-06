@@ -20,14 +20,14 @@ import com.example.instagram.model.DialogListItem;
 
 import java.util.ArrayList;
 
-public class DialogList extends Dialog {
+public class DialogList_icon extends Dialog {
     private Context context;
     private OnDialogClickListener onDialogClickListener;
 
     ArrayList<DialogListItem> itemList;
     RecyclerView list;
 
-    public DialogList(Context context, ArrayList<DialogListItem> itemList, OnDialogClickListener onDialogClickListener) {
+    public DialogList_icon(Context context, ArrayList<DialogListItem> itemList, OnDialogClickListener onDialogClickListener) {
         super(context, R.style.DefaultDialog_anim);
 
         this.context = context;

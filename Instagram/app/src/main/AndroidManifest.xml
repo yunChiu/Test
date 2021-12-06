@@ -30,7 +30,7 @@
         <!-- Shop -->
         <activity android:name=".Activity.Shop.Shop" />
         <!-- User -->
-        <activity android:name=".Activity.User.User" />
+        <activity android:name=".Activity.Account.Account" />
     </application>
 
 </manifest>
