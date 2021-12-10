@@ -1,6 +1,8 @@
 package com.example.instagram.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String biography = ""; //自我介紹
     private String external_url = ""; //個人連結
@@ -13,8 +15,8 @@ public class User {
     private Timeline edge_felix_video_timeline = new Timeline(); //post_video
     private Timeline edge_owner_to_timeline_media = new Timeline(); //post_grid
 
-    public class Count {
-        public int count = 0;
+    public class Count implements Serializable {
+        private int count = 0;
 
         public int getCount() {
             return count;
@@ -25,8 +27,8 @@ public class User {
         }
     }
 
-    public class Timeline {
-        public int count = 0;
+    public class Timeline implements Serializable {
+        private int count = 0;
         public Edges edges = new Edges();
 
         public int getCount() {

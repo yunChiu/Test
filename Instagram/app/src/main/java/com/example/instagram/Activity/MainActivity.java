@@ -2,6 +2,7 @@ package com.example.instagram.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.instagram.Dialog.DialogBtn;
+import com.example.instagram.Dialog.DialogList;
 import com.example.instagram.Dialog.DialogList_icon;
 import com.example.instagram.Dialog.OnDialogClickListener;
 import com.example.instagram.R;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         if (count == 0)
             textView.setVisibility(View.GONE);
         else
-            textView.setText(String.format("%d個讚", count));
+            textView.setText(String.format("%s個讚", count));
     }
 
     public void setText(String name, String text, TextView textView) {
@@ -51,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
         SpannableString userMsgStyle = new SpannableString(userMsg);
         userMsgStyle.setSpan(bold, 0, name.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         textView.setText(userMsgStyle);
+    }
+
+    /** Profile **/
+    public void setProfile(String data, TextView textView) {
+        if (data.isEmpty())
+            textView.setVisibility(View.GONE);
+        else
+            textView.setText(data);
     }
 
     public void setComment(int count, TextView textView) {
@@ -101,13 +111,89 @@ public class MainActivity extends AppCompatActivity {
         dialogBtn.show();
     }
 
-    public void showDialogList_menu(Context context) {
-        ArrayList<DialogListItem> userMenu = new ArrayList<>();
-//        node_more.add(new DialogListItem(R.drawable.setting,"設定"));
-        DialogList_icon dialogListIcon = new DialogList_icon(context, userMenu, new OnDialogClickListener() {
+    public void showDialogList_more(final Context context) {
+        ArrayList<String> menu = new ArrayList<>();
+        menu.add("檢舉");
+        menu.add("封鎖");
+        menu.add("關於這個帳號");
+        menu.add("限制");
+        menu.add("隱藏限時動態");
+        menu.add("複製個人檔案網址");
+        menu.add("分享此個人檔案");
+        final DialogList dialogList = new DialogList(context, menu, new OnDialogClickListener() {
             @Override
             public void onDialogClick(int action) {
+                switch (action){
+                    case 0:
+                        //檢舉
+                        break;
+                    case 1:
+                        //封鎖
+                        break;
+                    case 2:
+                        //關於這個帳號
+                        break;
+                    case 3:
+                        //限制
+                        break;
+                    case 4:
+                        //隱藏限時動態
+                        break;
+                    case 5:
+                        //複製個人檔案網址
+                        break;
+                    case 6:
+                        //分享此個人檔案
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+        dialogList.show();
+    }
 
+    public void showDialogList_menu(Context context) {
+        ArrayList<DialogListItem> menu = new ArrayList<>();
+        menu.add(new DialogListItem(R.drawable.setting,"設定"));
+        menu.add(new DialogListItem(R.drawable.collection,"典藏"));
+        menu.add(new DialogListItem(R.drawable.mystory,"你的動態"));
+        menu.add(new DialogListItem(R.drawable.qrcode,"QR碼"));
+        menu.add(new DialogListItem(R.drawable.keep_border,"我的珍藏"));
+        menu.add(new DialogListItem(R.drawable.friendlist,"摯友"));
+        menu.add(new DialogListItem(R.drawable.find,"探索用戶"));
+        menu.add(new DialogListItem(R.drawable.covid19,"新冠病毒資訊中心"));
+        DialogList_icon dialogListIcon = new DialogList_icon(context, menu, new OnDialogClickListener() {
+            @Override
+            public void onDialogClick(int action) {
+                switch (action){
+                    case 0:
+                        //設定
+                        break;
+                    case 1:
+                        //典藏
+                        break;
+                    case 2:
+                        //你的動態
+                        break;
+                    case 3:
+                        //QR碼
+                        break;
+                    case 4:
+                        //我的珍藏
+                        break;
+                    case 5:
+                        //摯友
+                        break;
+                    case 6:
+                        //探索用戶
+                        break;
+                    case 7:
+                        //新冠病毒資訊中心
+                        break;
+                    default:
+                        break;
+                }
             }
         });
         dialogListIcon.show();

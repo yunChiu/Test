@@ -1,7 +1,9 @@
 package com.example.instagram.model;
 
 
-public class Node {
+import java.io.Serializable;
+
+public class Node implements Serializable {
     private String shortcode = "";
     private Dimensions dimensions = new Dimensions();
     private String display_url = ""; //頭貼
@@ -16,9 +18,9 @@ public class Node {
     private double video_duration = 0.0;
 
     //class
-    public class Dimensions {
-        public int height = 0;
-        public int width = 0;
+    public class Dimensions implements Serializable{
+        private int height = 0;
+        private int width = 0;
 
         public int getHeight() {
             return height;
@@ -37,11 +39,11 @@ public class Node {
         }
     }
 
-    public class Edge_media_to_caption {
+    public class Edge_media_to_caption implements Serializable{
         private Edges_inner edges = new Edges_inner();
-        public class Edges_inner {
+        public class Edges_inner implements Serializable{
             private Node_inner node = new Node_inner();
-            public class Node_inner {
+            public class Node_inner implements Serializable{
                 private String text = "";
 
                 public void setText(String text) {
@@ -68,7 +70,7 @@ public class Node {
         }
     }
 
-    public class Count {
+    public class Count implements Serializable{
         private int count = 0;
 
         public void setCount(int count) {
@@ -79,7 +81,7 @@ public class Node {
         }
     }
 
-    public class Location {
+    public class Location implements Serializable{
         private String name = "";
 
         public void setName(String name) {

@@ -19,7 +19,7 @@
             android:orientation="vertical"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/hd_bg_story">
+            android:background="@drawable/hd_story_bg">
             <ImageView
                 android:id="@+id/img_user"
                 android:layout_width="match_parent"

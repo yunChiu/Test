@@ -154,6 +154,10 @@ public class SharedPreference {
         }
         return returnList;
     }
+    //清除所有愛心
+    public static void clearLikePost(Context context){
+        getSharedPreferences(context).edit().putString("likedPost", "").apply();
+    }
 
     //新增收藏
     public static void keep(Context context, String shortcode){
@@ -188,5 +192,9 @@ public class SharedPreference {
             }
         }
         return returnList;
+    }
+    //清除所有收藏
+    public static void clearKeepPost(Context context){
+        getSharedPreferences(context).edit().putString("keepPost", "").apply();
     }
 }

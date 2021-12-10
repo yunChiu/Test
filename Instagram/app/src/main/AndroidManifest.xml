@@ -21,7 +21,7 @@
         <activity android:name=".Activity.Login" />
         <activity android:name=".Activity.MainActivity"/>
         <!-- Home -->
-
+        <activity android:name=".Activity.Home.FollowingAccount" />
 
         <!-- Search -->
         <activity android:name=".Activity.Search.Search" />
@@ -31,6 +31,7 @@
         <activity android:name=".Activity.Shop.Shop" />
         <!-- User -->
         <activity android:name=".Activity.Account.Account" />
+
     </application>
 
 </manifest>

@@ -44,11 +44,13 @@ import com.example.instagram.model.User;
 
 import java.util.ArrayList;
 
+import static com.example.instagram.Activity.Home.FollowingAccount.BUNDLE_KEY_PROFILE;
+
 public class Home extends MainActivity {
     RecyclerView rv_story, rv_post;
     StoryAdapter storyAdapter;
     NodeAdapter nodeAdapter;
-    View nav_home, nav_search, nav_add, nav_shop, nav_user;
+    View nav_search, nav_add, nav_shop, nav_user;
 
     ArrayList<User> userList = new ArrayList<>(); //所有追蹤中的帳號
     int tag = 0; //目前顯示的帳號
@@ -63,6 +65,8 @@ public class Home extends MainActivity {
             getFollowedData(followedAccount.get(i));
         }
 
+//        SharedPreference.clearLikePost(Home.this);
+//        SharedPreference.clearKeepPost(Home.this);
         initView();
     }
 
@@ -155,8 +159,8 @@ public class Home extends MainActivity {
         }
     };
 
-    public void updatePost(int followedTag){
-        edges = userList.get(followedTag).getEdge_owner_to_timeline_media().edges;
+    public void updatePost(int tag){
+        edges = userList.get(tag).getEdge_owner_to_timeline_media().edges;
         nodeAdapter.notifyDataSetChanged();
     }
 
@@ -250,7 +254,13 @@ public class Home extends MainActivity {
             holder.tv_user.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //to personal page
+                    Intent intent = new Intent(Home.this,FollowingAccount.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(BUNDLE_KEY_PROFILE, userList.get(tag));
+                    intent.putExtras(bundle);
+                    intent.putExtra("hd",userList.get(tag).getProfile_pic_url_hd());
+                    intent.putExtra("userName",userList.get(tag).getUsername());
+                    startActivity(intent);
                 }
             });
             //更多
@@ -269,13 +279,13 @@ public class Home extends MainActivity {
             //照片
             Edges edges_child = edges.getNodeList().get(position).getEdge_sidecar_to_children();
             holder.pager_child.setAdapter(new NodeChildAdapter(edges_child));
-            //讚數 如果沒有讚整行不顯示
+            //讚數
             setLike(edges.getNodeList().get(position).getEdge_liked_by().getCount(), holder.tv_likedCount);
             //內容
             setText(userList.get(tag).getUsername(),
                     edges.getNodeList().get(position).getEdge_media_to_caption().getEdges_inner().getNode_inner().getText(),
                     holder.tv_userMsg);
-            //留言 如果沒有留言整行不顯示
+            //留言
             setComment(edges.getNodeList().get(position).getEdge_media_to_comment().getCount(), holder.tv_commentCount);
             //發文時間
             holder.tv_time.setText(String.format("%s • ", SetTime.setPostTime(edges.getNodeList().get(position).getTaken_at_timestamp())));

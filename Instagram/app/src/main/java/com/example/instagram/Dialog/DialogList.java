@@ -15,18 +15,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.instagram.R;
-import com.example.instagram.model.DialogListItem;
 
 import java.util.ArrayList;
 
-public class DialogList_icon extends Dialog {
+public class DialogList extends Dialog {
     private Context context;
     private OnDialogClickListener onDialogClickListener;
 
-    ArrayList<DialogListItem> itemList;
+    ArrayList<String> itemList;
     RecyclerView list;
 
-    public DialogList_icon(Context context, ArrayList<DialogListItem> itemList, OnDialogClickListener onDialogClickListener) {
+    public DialogList(Context context, ArrayList<String> itemList, OnDialogClickListener onDialogClickListener) {
         super(context, R.style.DefaultDialog_anim);
 
         this.context = context;
@@ -44,7 +43,7 @@ public class DialogList_icon extends Dialog {
         onWindowAttributesChanged(layoutParams);
     }
 
-    public void initView(){
+    private void initView(){
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_list, null);
         setContentView(view);
         list = view.findViewById(R.id.list);
@@ -52,33 +51,31 @@ public class DialogList_icon extends Dialog {
         list.setLayoutManager(new LinearLayoutManager(context));
     }
 
-    public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-        ArrayList<DialogListItem> itemList;
+    public class ListAdapter extends RecyclerView.Adapter<DialogList.ListAdapter.ViewHolder> {
+        ArrayList<String> itemList;
 
-        ListAdapter(ArrayList<DialogListItem> itemList) {
+        ListAdapter(ArrayList<String> itemList) {
             this.itemList = itemList;
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            ImageView img_icon;
             TextView tv_item;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                img_icon = itemView.findViewById(R.id.img_icon);
                 tv_item = itemView.findViewById(R.id.tv_item);
             }
         }
 
         @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(context).inflate(R.layout.adapter_dialoglist_icon, parent, false);
-            return new ViewHolder(view);
+        public DialogList.ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(context).inflate(R.layout.adapter_dialoglist, parent, false);
+            return new DialogList.ListAdapter.ViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull DialogList.ListAdapter.ViewHolder holder, final int position) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -86,8 +83,7 @@ public class DialogList_icon extends Dialog {
                     dismiss();
                 }
             });
-            holder.img_icon.setImageResource(itemList.get(position).getIconId());
-            holder.tv_item.setText(itemList.get(position).getItem());
+            holder.tv_item.setText(itemList.get(position));
         }
 
         @Override

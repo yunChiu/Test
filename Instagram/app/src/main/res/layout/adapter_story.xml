@@ -11,7 +11,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginHorizontal="6dp"
-        android:background="@drawable/hd_bg_story">
+        android:background="@drawable/hd_story_bg">
         <ImageView
             android:id="@+id/img_hd"
             android:layout_width="match_parent"
