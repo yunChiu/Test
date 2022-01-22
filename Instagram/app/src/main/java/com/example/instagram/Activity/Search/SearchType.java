@@ -46,11 +46,7 @@ public class SearchType extends MainActivity {
 
     String searchText = "";
 
-    SearchResult hot = new SearchResult(0, "");
-    SearchResult account = new SearchResult(0, "");
-    SearchResult tag = new SearchResult(0, "");
-    SearchResult location = new SearchResult(0, "");
-    SearchResult searchResult = new SearchResult(0,"");
+    SearchResult searchResult = new SearchResult();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +74,7 @@ public class SearchType extends MainActivity {
                     InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(et_searchText.getWindowToken(),0);
                     //更新當前Tab資料
-                    tag.updateTab(tabLayout.getSelectedTabPosition(), searchText);
+                    searchResult.updateTab(tabLayout.getSelectedTabPosition(), searchText);
                 }
                 return false;
             }
@@ -124,17 +120,8 @@ public class SearchType extends MainActivity {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
-            Log.e("createFragment","position:"+position);
-            if (position == 0){
-                return hot;
-            }else if (position == 1){
-                return account;
-            }else if (position == 2){
-                return tag;
-            }else {
-                return location;
-            }
-//            return new SearchResult(position, searchText);
+            searchResult = new SearchResult();
+            return searchResult;
         }
 
         @Override

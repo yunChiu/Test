@@ -101,7 +101,7 @@ public class SharedPreference {
                 }
             }
         }
-        Log.e("搜尋紀錄：",newHistory.toString());
+        Log.e("新增搜尋紀錄：",newHistory.toString());
         getSharedPreferences(context).edit().putString("history", newHistory.toString()).apply();
     }
     //查看前五筆搜尋紀錄

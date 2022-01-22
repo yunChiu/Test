@@ -20,5 +20,5 @@
         android:layout_height="24dp"
         android:layout_margin="6dp"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/tag"/>
+        android:src="@drawable/home_border"/>
 </RelativeLayout>

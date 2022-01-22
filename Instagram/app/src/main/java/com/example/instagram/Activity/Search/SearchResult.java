@@ -18,7 +18,7 @@ import com.example.instagram.Dialog.ShowDialog;
 import com.example.instagram.OkHttpManager;
 import com.example.instagram.R;
 import com.example.instagram.Tag_JsonData;
-import com.example.instagram.model.Tag;
+import com.example.instagram.model.HashTag;
 
 public class SearchResult extends BaseFragment {
 
@@ -27,22 +27,15 @@ public class SearchResult extends BaseFragment {
     View ll_searching;
     TextView tv_searching;
 
-    int type = 0;
     String searchText = "";
 
-    Tag tag = new Tag();
-
-    public SearchResult(int type, String searchText){
-        this.type = type;
-        this.searchText = searchText;
-    }
+    HashTag hashTag = new HashTag();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
         initView(view);
-//        updateTab(type, searchText);
         return view;
     }
 
@@ -52,13 +45,12 @@ public class SearchResult extends BaseFragment {
 
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        resultAdapter = new ResultAdapter(tag);
+        resultAdapter = new ResultAdapter(hashTag);
         recyclerView.setAdapter(resultAdapter);
     }
 
     public void updateTab(int type, String searchText){
         if (!searchText.isEmpty()){
-            Log.e("nowPosition","where"+type);
             switch (type){
                 case 0:
                     //熱門
@@ -85,13 +77,14 @@ public class SearchResult extends BaseFragment {
         okHttpManager.setContext(getContext()); //設context給getUserAgent用
         okHttpManager.getStringData(url);
         ll_searching.setVisibility(View.VISIBLE);
+        tv_searching.setText("正在搜尋" + searchText + "......");
     }
 
     private DataCallback dataCallback = new DataCallback() {
         @Override
         public void onDataSuccess(String data) {
             ll_searching.setVisibility(View.GONE);
-            tag = Tag_JsonData.getTagData(data);
+            hashTag = Tag_JsonData.getTagData(data);
             resultAdapter.notifyDataSetChanged();
             Log.e("tagData", data);
         }
@@ -110,10 +103,10 @@ public class SearchResult extends BaseFragment {
 
     public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder> {
 
-        Tag tag = new Tag();
+        HashTag hashTag;
 
-        public ResultAdapter(Tag tag){
-            this.tag = tag;
+        public ResultAdapter(HashTag hashTag){
+            this.hashTag = hashTag;
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
@@ -137,12 +130,12 @@ public class SearchResult extends BaseFragment {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             holder.tv_tagName.setText(searchText);
-            holder.tv_tagCount.setText(tag.getCount() + "則貼文");
+            holder.tv_tagCount.setText(hashTag.getEdge_hashtag_to_media().getCount() + "則貼文");
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return 1;
         }
     }
 }

@@ -3,22 +3,25 @@ package com.example.instagram;
 import android.util.Log;
 
 import com.example.instagram.model.Edges;
+import com.example.instagram.model.HashTag;
 import com.example.instagram.model.Node;
-import com.example.instagram.model.Tag;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Tag_JsonData {
 
-    public static Tag getTagData(String data) {
-        Tag tag = new Tag();
+    public static HashTag getTagData(String data) {
+        HashTag hashTag = new HashTag();
         try {
-            JSONObject jsonObject = new JSONObject(data).getJSONObject("graphql").getJSONObject("hashtag").getJSONObject("edge_hashtag_to_media");
-            tag.setCount(jsonObject.getInt("count"));
+            JSONObject jsonObject = new JSONObject(data).getJSONObject("graphql").getJSONObject("hashtag");
+            hashTag.setName(jsonObject.getString("name"));
+            hashTag.setProfile_pic_url(jsonObject.getString("profile_pic_url"));
+            JSONObject jsonObject_hashtag = new JSONObject(data).getJSONObject("graphql").getJSONObject("hashtag").getJSONObject("edge_hashtag_to_media");
+            hashTag.getEdge_hashtag_to_media().setCount(jsonObject_hashtag.getInt("count"));
             Edges edges = new Edges();
-            for (int i=0; i<jsonObject.getJSONArray("edges").length(); i++){
-                JSONObject jsonObject_node = jsonObject.getJSONArray("edges").getJSONObject(i).getJSONObject("node");
+            for (int i=0; i<jsonObject_hashtag.getJSONArray("edges").length(); i++){
+                JSONObject jsonObject_node = jsonObject_hashtag.getJSONArray("edges").getJSONObject(i).getJSONObject("node");
                 Node node = new Node();
                 node.setShortcode(jsonObject_node.getString("shortcode"));
                 node.getDimensions().setHeight(jsonObject_node.getJSONObject("dimensions").getInt("height"));
@@ -32,11 +35,11 @@ public class Tag_JsonData {
                 //edge_media_preview_like
                 edges.getNodeList().add(node);
             }
-            tag.setEdges(edges);
+            hashTag.getEdge_hashtag_to_media().setEdges(edges);
         } catch (JSONException e) {
             Log.e("Tag_JsonData", "getTagData-" + e.getMessage());
             return null;
         }
-        return tag;
+        return hashTag;
     }
 }
