@@ -43,11 +43,24 @@
     <!-- 圖片/影片 -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager_photo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:context=".ui.screens.intro.IntroViewPagerFragment"/>
+        <TextView
+            android:id="@+id/tv_nodechildcount"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:letterSpacing="-0.08"
+            android:background="@drawable/node_img_count"/>
         <LinearLayout
             android:id="@+id/ll_keep"
             android:orientation="horizontal"
@@ -83,30 +96,42 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:padding="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/btn_like"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/like_border" />
             <Button
                 android:id="@+id/btn_msg"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_toEndOf="@+id/btn_like"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="3dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/comment"/>
             <Button
                 android:id="@+id/btn_share"
-                android:layout_width="21dp"
-                android:layout_height="21dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
                 android:layout_marginTop="4dp"
                 android:layout_toEndOf="@+id/btn_msg"
                 android:background="@drawable/share"/>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                app:tabBackground="@drawable/selector"
+                app:tabGravity="center"
+                app:tabPaddingStart="5dp"
+                app:tabPaddingEnd="5dp"
+                app:tabIndicatorHeight="0dp">
+            </com.google.android.material.tabs.TabLayout>
             <Button
                 android:id="@+id/btn_keep"
                 android:layout_width="30dp"

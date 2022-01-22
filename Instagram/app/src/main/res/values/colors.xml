@@ -15,6 +15,7 @@
     <color name="lightgreen">#90EE90</color>
     <color name="red">#FF3333</color>
     <color name="gray">#AAAAAA</color>
+    <color name="lightgray">#DDDDDD</color>
     <color name="gainsboro">#DCDCDC</color>
     <color name="whitesmoke">#F5F5F5</color>
 </resources>

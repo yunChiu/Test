@@ -22,15 +22,18 @@
         <activity android:name=".Activity.MainActivity"/>
         <!-- Home -->
         <activity android:name=".Activity.Home.FollowingAccount" />
-
+        <activity android:name=".Activity.Home.FollowingNode" />
         <!-- Search -->
         <activity android:name=".Activity.Search.Search" />
+        <activity android:name=".Activity.Search.SearchType" />
+        <activity android:name=".Activity.Search.History" />
         <!-- Add -->
         <activity android:name=".Activity.Add.Add" />
         <!-- Shop -->
         <activity android:name=".Activity.Shop.Shop" />
-        <!-- User -->
+        <!-- Account -->
         <activity android:name=".Activity.Account.Account" />
+        <activity android:name=".Activity.Account.Setting" />
 
     </application>
 

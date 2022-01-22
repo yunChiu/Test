@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.instagram.model.RandomImg;
 import com.example.instagram.model.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class SharedPreference {
 
     private static SharedPreferences sharedPreferences = null;
 
-    private static SharedPreferences getSharedPreferences(Context context) {
+    public static SharedPreferences getSharedPreferences(Context context) {
         sharedPreferences = context.getSharedPreferences("saveData", MODE_PRIVATE);
         return sharedPreferences;
     }
@@ -56,15 +58,34 @@ public class SharedPreference {
 
     }
 
-//    //新增追蹤帳號資料
-//    public static void setFollowingData(Context context, String data){
-//        getSharedPreferences(context).edit().putString("followingData", data).apply();
-//    }
-//    //取得追蹤帳號資料
-//    public static ArrayList<User> getFollowingData(Context context){
-//        String userData = getSharedPreferences(context).getString("followingData","");
-//
-//    }
+    //新增追蹤帳號資料
+    public static void setUserJsonData(Context context, String userListStr){
+        getSharedPreferences(context).edit().putString("userListJsonData", userListStr).apply();
+    }
+    //取得追蹤帳號資料
+    public static ArrayList<User> getUserJsonData(Context context){
+        String userListStr = getSharedPreferences(context).getString("userListJsonData","");
+        if (!userListStr.isEmpty()) {
+            try {
+                ArrayList<User> returnList = new ArrayList<>();
+                JSONArray jsonArray = new JSONArray(userListStr);
+                for (int i=0; i<jsonArray.length(); i++){
+                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                    User user = IG_JsonData.getUserData(jsonObject.toString());
+                    returnList.add(user);
+                }
+                return returnList;
+            } catch (JSONException e) {
+                Log.e("SharedPreference","getUserJsonData" + e.getMessage());
+                return null;
+            }
+        } else
+            return null;
+    }
+
+    public static void delUserJsonData(Context context){
+        getSharedPreferences(context).edit().putString("userListJsonData", "").apply();
+    }
 
     //新增搜尋紀錄
     public static void setHistory(Context context, String newRecord) {
@@ -123,7 +144,8 @@ public class SharedPreference {
     //按愛心
     public static void like(Context context, String shortcode){
         ArrayList<String> likedPostList = getLikedPost(context);
-        likedPostList.add(shortcode);
+        if (!likedPostList.contains(shortcode))
+            likedPostList.add(shortcode);
         Log.e("Liked", likedPostList.toString());
         getSharedPreferences(context).edit().putString("likedPost", likedPostList.toString()).apply();
     }
@@ -196,5 +218,17 @@ public class SharedPreference {
     //清除所有收藏
     public static void clearKeepPost(Context context){
         getSharedPreferences(context).edit().putString("keepPost", "").apply();
+    }
+
+    //存搜尋假照片牆用的隨機照片
+    public static void setRandomImgList(Context context, String randomImgListStr){
+        getSharedPreferences(context).edit().putString("randomImgListStr", randomImgListStr).apply();
+    }
+    public static ArrayList<RandomImg> getRandomImgList(Context context){
+        String imgListStr = getSharedPreferences(context).getString("randomImgListStr","");
+        if (!imgListStr.isEmpty())
+            return RandomImg_JsonData.getImgList(imgListStr);
+        else
+            return null;
     }
 }

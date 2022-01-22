@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/back" />
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="15dp"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/search_bar"
+            android:imeOptions="actionSearch"
+            android:inputType="textNoSuggestions"
+            android:hint="搜尋" />
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/ll_tab"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/black"
+            app:tabIndicatorHeight="1dp">
+        </com.google.android.material.tabs.TabLayout>
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@+id/tabLayout"
+            android:background="?android:attr/listDivider" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/divider" />
+    </RelativeLayout>
+</LinearLayout>

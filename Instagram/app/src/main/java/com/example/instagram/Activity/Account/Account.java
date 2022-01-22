@@ -1,5 +1,6 @@
 package com.example.instagram.Activity.Account;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,12 @@ import com.example.instagram.Activity.Home.Home;
 import com.example.instagram.Activity.MainActivity;
 import com.example.instagram.Activity.Search.Search;
 import com.example.instagram.Activity.Shop.Shop;
+import com.example.instagram.Dialog.DialogList_icon;
+import com.example.instagram.Dialog.OnDialogClickListener;
 import com.example.instagram.R;
+import com.example.instagram.model.DialogListItem;
+
+import java.util.ArrayList;
 
 public class Account extends MainActivity {
     Button btn_menu;
@@ -30,7 +36,7 @@ public class Account extends MainActivity {
         initView();
     }
 
-    private void initView() {
+    public void initView() {
         setContentView(R.layout.activity_account);
         btn_menu = findViewById(R.id.btn_menu);
         btn_menu.setOnClickListener(onClickListener);
@@ -83,4 +89,50 @@ public class Account extends MainActivity {
             }
         }
     };
+
+    public void showDialogList_menu(Context context) {
+        ArrayList<DialogListItem> menu = new ArrayList<>();
+        menu.add(new DialogListItem(R.drawable.setting,"設定"));
+        menu.add(new DialogListItem(R.drawable.collection,"典藏"));
+        menu.add(new DialogListItem(R.drawable.mystory,"你的動態"));
+        menu.add(new DialogListItem(R.drawable.qrcode,"QR碼"));
+        menu.add(new DialogListItem(R.drawable.keep_border,"我的珍藏"));
+        menu.add(new DialogListItem(R.drawable.friendlist,"摯友"));
+        menu.add(new DialogListItem(R.drawable.find,"探索用戶"));
+        menu.add(new DialogListItem(R.drawable.covid19,"新冠病毒資訊中心"));
+        DialogList_icon dialogListIcon = new DialogList_icon(context, menu, new OnDialogClickListener() {
+            @Override
+            public void onDialogClick(int action) {
+                switch (action){
+                    case 0:
+                        //設定
+                        break;
+                    case 1:
+                        //典藏
+                        break;
+                    case 2:
+                        //你的動態
+                        break;
+                    case 3:
+                        //QR碼
+                        break;
+                    case 4:
+                        //我的珍藏
+                        break;
+                    case 5:
+                        //摯友
+                        break;
+                    case 6:
+                        //探索用戶
+                        break;
+                    case 7:
+                        //新冠病毒資訊中心
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+        dialogListIcon.show();
+    }
 }

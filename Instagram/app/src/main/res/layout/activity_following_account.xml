@@ -211,6 +211,7 @@
         android:layout_height="wrap_content"
         android:paddingVertical="12dp">
         <LinearLayout
+            android:id="@+id/ll_home"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

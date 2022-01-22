@@ -13,10 +13,9 @@ import java.util.ArrayList;
 
 public class IG_JsonData {
 
-    public static ArrayList<User> getUserJsonData(String data){
-        ArrayList<User> userList = new ArrayList<>();
+    public static User getUserData(String data){
+        User user = new User();
         try {
-            User user = new User();
             JSONObject jsonObject = new JSONObject(data).getJSONObject("graphql").getJSONObject("user");
             user.setBiography(jsonObject.getString("biography"));
             user.setExternal_url(jsonObject.getString("external_url"));
@@ -25,7 +24,33 @@ public class IG_JsonData {
             user.setFull_name(jsonObject.getString("full_name"));
             user.setProfile_pic_url_hd(jsonObject.getString("profile_pic_url_hd"));
             user.setUsername(jsonObject.getString("username"));
-            //貼文(Grid)
+
+            //貼文(Video)
+            JSONObject jsonObject_video = jsonObject.getJSONObject("edge_felix_video_timeline");
+            Edges edges_video = new Edges();
+            for (int i=0; i<jsonObject_video.getJSONArray("edges").length(); i++){
+                JSONObject jsonObject_node = jsonObject_video.getJSONArray("edges").getJSONObject(i).getJSONObject("node");
+                Node node = new Node();
+                node.setShortcode(jsonObject_node.getString("shortcode"));
+                //dimensions
+                node.setDisplay_url(jsonObject_node.getString("display_url"));
+                //isVideo
+                //has_audio
+                //video_url
+                //video_view_count
+                if (jsonObject_node.getJSONObject("edge_media_to_caption").getJSONArray("edges").length() > 0)
+                    node.getEdge_media_to_caption().getEdges_inner().getNode_inner().setText(jsonObject_node.getJSONObject("edge_media_to_caption").getJSONArray("edges").getJSONObject(0).getJSONObject("node").getString("text"));
+                node.getEdge_media_to_comment().setCount(jsonObject_node.getJSONObject("edge_media_to_comment").getInt("count"));
+                node.setTaken_at_timestamp(jsonObject_node.getInt("taken_at_timestamp"));
+                node.getEdge_liked_by().setCount(jsonObject_node.getJSONObject("edge_liked_by").getInt("count"));
+                //edge_media_preview_like
+                //location
+                //video_duration
+                edges_video.getNodeList().add(node);
+            }
+            user.getEdge_felix_video_timeline().setEdges(edges_video);
+
+            //貼文(All)
             JSONObject jsonObject_grid = jsonObject.getJSONObject("edge_owner_to_timeline_media");
             user.getEdge_owner_to_timeline_media().setCount(jsonObject_grid.getInt("count"));
             Edges edges = new Edges();
@@ -33,7 +58,8 @@ public class IG_JsonData {
                 JSONObject jsonObject_node = jsonObject_grid.getJSONArray("edges").getJSONObject(i).getJSONObject("node");
                 Node node = new Node();
                 node.setShortcode(jsonObject_node.getString("shortcode"));
-                //dimensions
+                node.getDimensions().setHeight(jsonObject_node.getJSONObject("dimensions").getInt("height"));
+                node.getDimensions().setWidth(jsonObject_node.getJSONObject("dimensions").getInt("width"));
                 node.setDisplay_url(jsonObject_node.getString("display_url"));
                 //isVideo
                 if (jsonObject_node.getJSONObject("edge_media_to_caption").getJSONArray("edges").length() > 0)
@@ -49,6 +75,8 @@ public class IG_JsonData {
                         JSONObject jsonObject_node_child = jsonObject_node.getJSONObject("edge_sidecar_to_children").getJSONArray("edges").getJSONObject(j).getJSONObject("node");
                         Node node_child = new Node();
                         node_child.setShortcode(jsonObject_node_child.getString("shortcode"));
+                        node_child.getDimensions().setHeight(jsonObject_node.getJSONObject("dimensions").getInt("height"));
+                        node_child.getDimensions().setWidth(jsonObject_node.getJSONObject("dimensions").getInt("width"));
                         node_child.setDisplay_url(jsonObject_node_child.getString("display_url"));
                         edges_child.getNodeList().add(node_child);
                     }
@@ -60,10 +88,11 @@ public class IG_JsonData {
                 edges.getNodeList().add(node);
             }
             user.getEdge_owner_to_timeline_media().setEdges(edges);
-            userList.add(user);
+
         } catch (JSONException e) {
-            Log.e("IG_JsonData", "getUserJsonData-" + e.getMessage());
+            Log.e("IG_JsonData", "getUserData-" + e.getMessage());
+            return null;
         }
-        return userList;
+        return user;
     }
 }

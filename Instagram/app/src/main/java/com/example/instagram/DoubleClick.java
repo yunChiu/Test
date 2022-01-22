@@ -9,17 +9,18 @@ import android.view.View;
 public class DoubleClick implements View.OnTouchListener {
     private Context context;
     private final OnDoubleClickListener onDoubleClickListener;
+    private final View.OnTouchListener onTouchListener;
 
-    public DoubleClick(Context context, OnDoubleClickListener onDoubleClickListener){
+    public DoubleClick(Context context, OnDoubleClickListener onDoubleClickListener, View.OnTouchListener onTouchListener){
         this.context = context;
         this.onDoubleClickListener = onDoubleClickListener;
+        this.onTouchListener = onTouchListener;
     }
 
     private final GestureDetector gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
         @Override
-        public boolean onDoubleTap(MotionEvent e) {
-            Log.e("DoubleClick","onDoubleTap");
-            onDoubleClickListener.onDoubleClick(1);
+        public boolean onDoubleTap(MotionEvent motionEvent) {
+            onDoubleClickListener.onDoubleClick();
             return true;
         }
 
@@ -30,8 +31,9 @@ public class DoubleClick implements View.OnTouchListener {
     });
 
     @Override
-    public boolean onTouch(View view, MotionEvent event) {
-        gestureDetector.onTouchEvent(event);
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        gestureDetector.onTouchEvent(motionEvent);
+        onTouchListener.onTouch(view, motionEvent);
         return true;
     }
 }
